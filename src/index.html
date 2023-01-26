@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To do List</title>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To do List</title>
+  </head>
+  <body>
+    <main class="container">
+      <div class="list-container">
+        <div class="list-item"><h1>Today's To Do</h1></div>
+        <div class="list-item"><input type="text" name="description" id="taskDescription" placeholder="Add to your list" /></div>
+        <ul role="list" class="task-list">
+          
+        </ul>
+        <template id="list-item-template">
+          <li class="list-item">
+            <label><input type="checkbox" id="" value="" data-index="" /></label>
+          </li>
+        </template>
+        <div class="list-item">
+          <button type="button" class="button-clear">Clear all completed</button>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
