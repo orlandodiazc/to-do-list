@@ -1,15 +1,12 @@
 import './style.css';
+import './modules/taskControl.js'
 import { updateCompletedStatus, clearCompletedTasks } from './modules/checkboxUpdates.js';
 
 const taskList = document.querySelector('.task-list');
 const listItemTemplate = document.getElementById('list-item-template');
 const btnClear = document.querySelector('.button-clear');
 
-let tasks = [
-  { description: 'wash the dishes', completed: false, index: 1 },
-  { description: 'complete project', completed: false, index: 0 },
-  { description: 'complete project', completed: false, index: 2 },
-];
+let tasks = [];
 
 const addTask = (newTask) => {
   const taskClone = listItemTemplate.content.cloneNode(true);
@@ -23,7 +20,7 @@ const addTask = (newTask) => {
 };
 
 const displayTasks = (tasks) => {
-  tasks.forEach((task) => addTask(task));
+  tasks.sort((a,b) => a.index - b.index).forEach((task) => addTask(task));
 };
 
 if (localStorage.getItem('tasks')){
