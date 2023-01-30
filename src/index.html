@@ -10,7 +10,7 @@
     <main class="container">
       <div class="list-container">
         <div class="list-item"><h1>Today's To Do</h1></div>
-        <form action="" class="form-description">
+        <form action="#" class="form-description">
           <div class="list-item">
             <input type="text" name="description" id="taskDescription" placeholder="Add to your list" />
           </div>
@@ -18,7 +18,10 @@
         <ul role="list" class="task-list"></ul>
         <template id="list-item-template">
           <li class="list-item">
-            <label><input type="checkbox" id="" value="" data-index="" /></label>
+            <div class="task-item">
+              <label><input type="checkbox" id="" value="" /></label>
+              <div><span class="task-description" contenteditable="true"></span></div>
+            </div>
           </li>
         </template>
         <div class="list-item">

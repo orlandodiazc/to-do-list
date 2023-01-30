@@ -86,7 +86,7 @@ main {
 }
 
 input[type="checkbox"] {
-  margin-right: 1ch;
+  margin: 1ch 1ch 1ch 1rem;
 }
 
 input[type="text"] {
@@ -135,4 +135,29 @@ input:placeholder-shown {
 .list-item label {
   display: flex;
   align-items: center;
+}
+
+.task-item {
+  padding: 0.4rem 1rem 0.4rem 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr auto;
+}
+
+.task-item span {
+  display: flex;
+  align-items: center;
+  /* padding-top: 0.3ch ; */
+}
+
+[contenteditable] {
+  outline: 0px solid transparent;
+}
+
+[contenteditable]:focus{
+  background: #b7b7b7;
+}
+
+.task-description {
+  display: block;
 }

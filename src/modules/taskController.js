@@ -1,3 +1,5 @@
+import { removeTaskFromList } from "./taskDisplay";
+
 export default class TaskLibrary {
   constructor() {
     this.tasks = [];
@@ -17,6 +19,7 @@ export default class TaskLibrary {
     //     }
     //   });
     // }
+    removeTaskFromList(indexToDelete);
     this.tasks.splice(indexToDelete, 1);
     if (indexToDelete < this.tasks.length) {
       this.tasks.map((task, i) => {
@@ -41,9 +44,8 @@ export default class TaskLibrary {
 
   clearCompleted(taskList) {
     this.tasks = this.tasks.filter((task) => {
-      if (task.completed === true) {
-        const activeTask = taskList.querySelector(`input[data-index="${task.index}"]`);
-        taskList.removeChild(activeTask.parentNode.parentNode);
+      if (task.completed) {
+        removeTaskFromList(task.index);
       }
       return task.completed === false
     });
