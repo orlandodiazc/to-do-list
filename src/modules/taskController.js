@@ -1,6 +1,6 @@
-import { removeTaskFromList, updateIndexes } from './taskDisplay';
+import { removeTaskFromList, updateIndexes } from './taskDisplay.js';
 
-export default class TaskLibrary {
+export default class TaskController {
   constructor() {
     this.tasks = [];
   }
@@ -15,8 +15,8 @@ export default class TaskLibrary {
     if (indexToDelete < this.tasks.length) {
       this.tasks.forEach((task, i) => {
         if (i >= indexToDelete) {
-          task.index = task.index - 1;
           updateIndexes(task.index);
+          task.index -= task.index;
         }
       });
     }
@@ -38,9 +38,8 @@ export default class TaskLibrary {
     taskToUpdate.completed = !taskToUpdate.completed;
   }
 
-  clearCompleted(taskList) {
-    for (let i = this.tasks.length - 1; i >= 0; i--) {
-      console.log(this.tasks[i]);
+  clearCompleted() {
+    for (let i = this.tasks.length - 1; i >= 0; i -= 1) {
       if (this.tasks[i].completed) {
         this.deleteTask(i);
       }
