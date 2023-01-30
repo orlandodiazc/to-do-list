@@ -14,20 +14,33 @@ export const addTaskToList = (newTask) => {
   taskCheckbox.setAttribute('value', `task${newTask.index}`);
   taskList.appendChild(taskClone);
   const currentTask = taskList.querySelector('li:last-child');
-  const inputCheckbox = currentTask.querySelector('input');
 
+  const btnDelete = listItem.querySelector('button');
+  btnDelete.addEventListener('mousedown', (e) => {
+    const index = e.target.closest('.list-item').dataset.index;
+    taskController.deleteTask(index);
+  });
+
+  const inputCheckbox = currentTask.querySelector('input');
   inputCheckbox.addEventListener('change', (e) => {
     taskController.updateCompleted(e.target.closest('.list-item').dataset.index);
   });
+
   const editTask = currentTask.querySelector('span');
-  editTask.addEventListener('focusout', (e) => {
+  editTask.addEventListener('blur', (e) => {
+    e.stopPropagation();
     const description = e.target.textContent;
     const index = e.target.closest('.list-item').dataset.index;
     e.target.closest('.list-item').style.backgroundColor = 'white';
-    console.log(index);
     taskController.editTaskDescription(description, index);
+    const deleteButton = e.target.parentNode.parentNode.querySelector('button');
+    deleteButton.classList.add('hidden');
   });
-  editTask.addEventListener('focusin', (e) => {
+
+  editTask.addEventListener('focus', (e) => {
+    console.log(e.target, taskController.tasks);
+    const deleteButton = e.target.parentNode.parentNode.querySelector('button');
+    deleteButton.classList.remove('hidden');
     e.target.closest('.list-item').style.backgroundColor = '#b7b7b7';
   });
 };
@@ -41,4 +54,9 @@ export const displayTasks = (tasks) => {
 export const removeTaskFromList = (taskIndex) => {
   const activeTask = taskList.querySelector(`.list-item[data-index="${taskIndex}"]`);
   taskList.removeChild(activeTask);
+};
+
+export const updateIndexes = (index) => {
+  const listItem = document.querySelector(`.list-item[data-index="${index + 1}"]`);
+  listItem.dataset.index = index;
 };

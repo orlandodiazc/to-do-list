@@ -11,8 +11,8 @@
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role="list"],
-ol[role="list"] {
+ul[role='list'],
+ol[role='list'] {
   list-style: none;
 }
 
@@ -85,21 +85,21 @@ main {
   padding: 0;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   margin: 1ch 1ch 1ch 1rem;
 }
 
-input[type="text"] {
+input[type='text'] {
   width: 100%;
   border: none;
   background: none;
 }
 
-input[type="text"]:not(:last-child) {
+input[type='text']:not(:last-child) {
   margin-right: 1ch;
 }
 
-input[type="text"]:focus {
+input[type='text']:focus {
   outline: none;
   background-color: rgba(0, 0, 0, 0.2);
 }
@@ -145,15 +145,24 @@ input:placeholder-shown {
 }
 
 .task-item span {
-  display: flex;
-  align-items: center;
-}
-
-.task-item div {
+  padding-top: 0.15em;
   display: flex;
   align-items: center;
 }
 
 [contenteditable] {
   outline: 0px solid transparent;
+}
+
+.hidden {
+  display: none;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+}
+
+.icon-button:hover {
+  cursor: pointer;
 }

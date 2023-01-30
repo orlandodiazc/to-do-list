@@ -1,7 +1,7 @@
 import './style.css';
 import TaskController from './modules/taskController.js';
 import Task from './modules/taskGenerator.js';
-import {displayTasks, addTaskToList} from './modules/taskDisplay';
+import { displayTasks, addTaskToList } from './modules/taskDisplay';
 
 const btnClear = document.querySelector('.button-clear');
 const inputTask = document.querySelector('.form-description');
@@ -10,9 +10,6 @@ export const taskController = new TaskController();
 if (localStorage.getItem('tasks')) {
   if (JSON.parse(localStorage.getItem('tasks')).length > 0) {
     const loadedTasks = JSON.parse(localStorage.getItem('tasks'));
-    for (let i = 0; i < loadedTasks.length; i++) {
-      loadedTasks[i].index = i;
-    }
     taskController.tasks = loadedTasks;
     displayTasks(loadedTasks);
   }
@@ -31,6 +28,3 @@ inputTask.addEventListener('submit', (e) => {
   localStorage.setItem('tasks', JSON.stringify(taskController.tasks));
   description.value = '';
 });
-
-
-
