@@ -147,17 +147,13 @@ input:placeholder-shown {
 .task-item span {
   display: flex;
   align-items: center;
-  /* padding-top: 0.3ch ; */
+}
+
+.task-item div {
+  display: flex;
+  align-items: center;
 }
 
 [contenteditable] {
   outline: 0px solid transparent;
-}
-
-[contenteditable]:focus{
-  background: #b7b7b7;
-}
-
-.task-description {
-  display: block;
 }

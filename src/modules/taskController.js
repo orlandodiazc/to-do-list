@@ -30,14 +30,13 @@ export default class TaskLibrary {
     }
   }
 
-  editTaskDescription(description) {
+  editTaskDescription(description, indexTarget) {
     const result = this.tasks.find((task) => task.index === +indexTarget);
     result.description = description;
+    console.log(this.tasks)
   }
 
   updateCompleted(indexTarget) {
-    console.log(indexTarget)
-    console.log(this.tasks);
     const taskToUpdate = this.tasks.find((task) => task.index === +indexTarget);
     taskToUpdate.completed = !taskToUpdate.completed;
   }
