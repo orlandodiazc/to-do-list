@@ -17,11 +17,12 @@
         </form>
         <ul role="list" class="task-list"></ul>
         <template id="list-item-template">
-          <li class="list-item">
+          <li class="list-item" draggable="true">
             <div class="task-item">
               <label><input type="checkbox" id="" value="" /></label>
               <div><span class="task-description" contenteditable="true"></span></div>
               <button class="icon-button hidden"><img src="assets/icon-delete.svg" alt="Delete task" /></button>
+              <button class="icon-button drag-icon"><img src="assets/icon-drag-vert.svg" alt="Drag vertically" /></button>
             </div>
           </li>
         </template>

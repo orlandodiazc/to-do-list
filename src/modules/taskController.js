@@ -16,7 +16,7 @@ export default class TaskController {
       this.tasks.forEach((task, i) => {
         if (i >= indexToDelete) {
           updateIndexes(task.index);
-          task.index -= task.index;
+          task.index -= 1;
         }
       });
     }
@@ -40,7 +40,7 @@ export default class TaskController {
 
   clearCompleted() {
     for (let i = this.tasks.length - 1; i >= 0; i -= 1) {
-      if (this.tasks[i].completed) {
+      if (this.tasks[i].completed === true) {
         this.deleteTask(i);
       }
     }

@@ -22,5 +22,5 @@ export const removeTaskFromList = (taskIndex) => {
 
 export const updateIndexes = (index) => {
   const listItem = taskList.querySelector(`.list-item[data-index="${index}"]`);
-  listItem.dataset.index -= index;
+  listItem.dataset.index -= 1;
 };

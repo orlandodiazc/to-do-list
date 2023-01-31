@@ -36,6 +36,9 @@ const updateEventHandler = (currentTask) => {
     deleteButton.classList.remove('hidden');
     e.target.closest('.list-item').style.backgroundColor = '#b7b7b7';
   });
+
+  const dragIcon = currentTask.querySelector('.drag-icon');
+  dragIcon.addEventListener('dragstart', () => {});
 };
 
 const displayTasks = (tasks) => {

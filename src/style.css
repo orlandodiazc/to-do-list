@@ -161,6 +161,7 @@ input:placeholder-shown {
 .icon-button {
   background: none;
   border: none;
+  padding: 0;
 }
 
 .icon-button:hover {
