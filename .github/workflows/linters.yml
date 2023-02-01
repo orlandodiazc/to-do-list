@@ -18,6 +18,8 @@ jobs:
         run: npm install -g @lhci/cli@0.7.x
       - name: Lighthouse Report
         run: lhci autorun --upload.target=temporary-public-storage --collect.staticDistDir=.
+      - name: Setup html-webpack-plugin
+        run: npm install html-webpack-plugin
   webhint:
     name: Webhint
     runs-on: ubuntu-22.04
