@@ -18,7 +18,7 @@ const updateEventHandler = (currentTask) => {
 
   const inputCheckbox = currentTask.querySelector('input');
   inputCheckbox.addEventListener('change', (e) => {
-    e.target.closest('.list-item').classList.toggle('strikethrough')
+    e.target.closest('.list-item').classList.toggle('strikethrough');
     taskController.updateCompleted(e.target.closest('.list-item').dataset.index);
   });
 
