@@ -123,8 +123,8 @@ input:placeholder-shown {
 
 .list-container {
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
-  width: 100%;
-  max-width: 40%;
+  width: 90%;
+  max-width: 35rem;
   background-color: white;
 }
 
@@ -146,6 +146,11 @@ input:placeholder-shown {
 
 .task-item span {
   padding-top: 0.15em;
+  display: flex;
+  align-items: center;
+}
+
+.task-item > div {
   display: flex;
   align-items: center;
 }
@@ -174,4 +179,8 @@ input:placeholder-shown {
 
 .dragging {
   opacity: 0.5;
+}
+
+.strikethrough {
+  text-decoration: line-through;
 }
