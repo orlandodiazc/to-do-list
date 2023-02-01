@@ -1,6 +1,5 @@
 export default function startDragDrop() {
   const taskContainer = document.querySelector('.task-list');
-  const taskItems = document.querySelectorAll('.task-list li');
 
   function getDragAfterElement(y) {
     const dragabbleTasks = [...taskContainer.querySelectorAll('.task-list li:not(.dragging)')];
@@ -16,7 +15,7 @@ export default function startDragDrop() {
       { offset: Number.NEGATIVE_INFINITY },
     ).element;
   }
-  let previousAfterElement = undefined;
+  let previousAfterElement;
   taskContainer.addEventListener('dragover', (e) => {
     e.preventDefault();
     const currentDrag = document.querySelector('.dragging');

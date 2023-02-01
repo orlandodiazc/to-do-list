@@ -44,7 +44,7 @@ const updateEventHandler = (currentTask) => {
   currentTask.addEventListener('dragstart', () => {
     currentTask.classList.add('dragging');
   });
-  currentTask.addEventListener('dragend', (e) => {
+  currentTask.addEventListener('dragend', () => {
     currentTask.classList.remove('dragging');
     const afterElement = document.querySelector('.after-element');
     const afterIndex = afterElement == null ? null : afterElement.dataset.index;

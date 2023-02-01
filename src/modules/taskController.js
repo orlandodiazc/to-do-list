@@ -1,4 +1,4 @@
-import { removeTaskFromList, updateIndexes } from './taskDisplay.js';
+import { removeTaskFromList } from './taskDisplay.js';
 
 export default class TaskController {
   constructor() {
@@ -16,12 +16,10 @@ export default class TaskController {
     const taskToMove = this.tasks.splice(fromIndex, 1)[0];
     if (afterIndex == null) {
       this.tasks.push(taskToMove);
+    } else if (fromIndex <= toIndex) {
+      this.tasks.splice(toIndex - 1, 0, taskToMove);
     } else {
-      if (fromIndex <= toIndex) {
-        this.tasks.splice(toIndex - 1, 0, taskToMove);
-      } else {
-        this.tasks.splice(toIndex, 0, taskToMove);
-      }
+      this.tasks.splice(toIndex, 0, taskToMove);
     }
     this.updateStorage();
   }
