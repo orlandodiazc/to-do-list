@@ -146,6 +146,7 @@ input:placeholder-shown {
 
 .task-item span {
   padding-top: 0.15em;
+  flex: 1;
   display: flex;
   align-items: center;
 }
@@ -153,6 +154,7 @@ input:placeholder-shown {
 .task-item > div {
   display: flex;
   align-items: center;
+  margin-right: 0.5rem;
 }
 
 [contenteditable] {
