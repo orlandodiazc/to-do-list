@@ -2,6 +2,7 @@ import './style.css';
 import TaskController from './modules/taskController.js';
 import Task from './modules/taskGenerator.js';
 import { addTaskToList } from './modules/taskDisplay.js';
+import startDragDrop from './modules/taskDragDrop.js';
 
 const taskController = new TaskController();
 
@@ -22,23 +23,33 @@ const updateEventHandler = (currentTask) => {
 
   const editTask = currentTask.querySelector('span');
   editTask.addEventListener('blur', (e) => {
-    e.stopPropagation();
     const description = e.target.textContent;
     const index = e.target.closest('.list-item').getAttribute('data-index');
     e.target.closest('.list-item').style.backgroundColor = 'white';
     taskController.editTaskDescription(description, index);
     const deleteButton = e.target.parentNode.parentNode.querySelector('button');
     deleteButton.classList.add('hidden');
+    currentTask.setAttribute('draggable', true);
+    currentTask.querySelector('.drag-icon').classList.remove('hidden');
   });
 
   editTask.addEventListener('focus', (e) => {
     const deleteButton = e.target.parentNode.parentNode.querySelector('button');
     deleteButton.classList.remove('hidden');
-    e.target.closest('.list-item').style.backgroundColor = '#b7b7b7';
+    e.target.closest('.list-item').style.backgroundColor = '#e6e6e6';
+    currentTask.setAttribute('draggable', false);
+    currentTask.querySelector('.drag-icon').classList.add('hidden');
   });
 
-  const dragIcon = currentTask.querySelector('.drag-icon');
-  dragIcon.addEventListener('dragstart', () => {});
+  currentTask.addEventListener('dragstart', () => {
+    currentTask.classList.add('dragging');
+  });
+  currentTask.addEventListener('dragend', (e) => {
+    currentTask.classList.remove('dragging');
+    const afterElement = document.querySelector('.after-element');
+    const afterIndex = afterElement == null ? null : afterElement.dataset.index;
+    taskController.sort(currentTask.dataset.index, afterIndex);
+  });
 };
 
 const displayTasks = (tasks) => {
@@ -50,6 +61,9 @@ const displayTasks = (tasks) => {
 
 if (localStorage.getItem('tasks') && JSON.parse(localStorage.getItem('tasks')).length > 0) {
   const loadedTasks = JSON.parse(localStorage.getItem('tasks'));
+  loadedTasks.forEach((task, i) => {
+    task.index = i;
+  });
   taskController.tasks = loadedTasks;
   displayTasks(loadedTasks);
 }
@@ -65,6 +79,7 @@ inputTask.addEventListener('submit', (e) => {
   taskController.addTask(newTask);
   const currentTask = addTaskToList(newTask);
   updateEventHandler(currentTask);
-  localStorage.setItem('tasks', JSON.stringify(taskController.tasks));
   description.value = '';
 });
+
+startDragDrop();

@@ -16,7 +16,7 @@ export const addTaskToList = (newTask) => {
 };
 
 export const removeTaskFromList = (taskIndex) => {
-  const activeTask = taskList.querySelector(`.list-item[data-index="${taskIndex}"]`);
+  const activeTask = taskList.querySelector(`[data-index="${taskIndex}"]`);
   taskList.removeChild(activeTask);
 };
 

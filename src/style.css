@@ -167,3 +167,11 @@ input:placeholder-shown {
 .icon-button:hover {
   cursor: pointer;
 }
+
+.drag-icon:hover {
+  cursor: move;
+}
+
+.dragging {
+  opacity: 0.5;
+}
