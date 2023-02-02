@@ -179,6 +179,10 @@ input:placeholder-shown {
   cursor: move;
 }
 
+.dragging {
+  opacity: 0.5;
+}
+
 .strikethrough {
   text-decoration: line-through;
 }
