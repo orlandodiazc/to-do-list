@@ -18,8 +18,9 @@ const updateEventHandler = (currentTask) => {
 
   const inputCheckbox = currentTask.querySelector('input');
   inputCheckbox.addEventListener('change', (e) => {
-    e.target.closest('.list-item').classList.toggle('strikethrough');
-    taskController.updateCompleted(e.target.closest('.list-item').dataset.index);
+    const currentTask = e.target.closest('.list-item');
+    currentTask.querySelector('span').classList.toggle('strikethrough');
+    taskController.updateCompleted(currentTask.dataset.index);
   });
 
   const editTask = currentTask.querySelector('span');
@@ -45,6 +46,7 @@ const updateEventHandler = (currentTask) => {
   currentTask.addEventListener('dragstart', () => {
     currentTask.classList.add('dragging');
   });
+
   currentTask.addEventListener('dragend', () => {
     currentTask.classList.remove('dragging');
     const afterElement = document.querySelector('.after-element');

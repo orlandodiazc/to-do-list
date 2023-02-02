@@ -46,6 +46,7 @@ export default class TaskController {
   updateCompleted(indexTarget) {
     const taskToUpdate = this.tasks.find((task) => task.index === +indexTarget);
     taskToUpdate.completed = !taskToUpdate.completed;
+    this.updateStorage();
   }
 
   clearCompleted() {

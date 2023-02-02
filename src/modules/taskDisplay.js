@@ -10,6 +10,8 @@ export const addTaskToList = (newTask) => {
   listItem.querySelector('.task-description').appendChild(description);
   taskCheckbox.setAttribute('id', `item${newTask.index}`);
   taskCheckbox.setAttribute('value', `task${newTask.index}`);
+  if (newTask.completed) listItem.querySelector('.task-description').classList.add('strikethrough');
+  taskCheckbox.checked = newTask.completed;
   taskList.appendChild(taskClone);
   const currentTask = taskList.querySelector('li:last-child');
   return currentTask;
