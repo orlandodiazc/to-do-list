@@ -27,6 +27,8 @@ After you're finished please remove all the comments and instructions!
 
 **To Do List** is a HTML/CSS/JS project that uses webpack bundling.
 
+[Live Site](https://stunning-bonbon-dbeffd.netlify.app/)
+
 ## Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
