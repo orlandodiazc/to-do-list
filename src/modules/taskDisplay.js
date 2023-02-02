@@ -21,3 +21,10 @@ export const removeTaskFromList = (taskIndex) => {
   const activeTask = taskList.querySelector(`[data-index="${taskIndex}"]`);
   taskList.removeChild(activeTask);
 };
+
+export const updateElementIndex = () => {
+  const taskItems = taskList.querySelectorAll('.list-item');
+  taskItems.forEach((task, i) => {
+    task.dataset.index = i;
+  });
+};

@@ -1,4 +1,4 @@
-import { removeTaskFromList } from './taskDisplay.js';
+import { removeTaskFromList, updateElementIndex } from './taskDisplay.js';
 
 export default class TaskController {
   constructor() {
@@ -21,14 +21,13 @@ export default class TaskController {
     } else {
       this.tasks.splice(toIndex, 0, taskToMove);
     }
-    this.updateStorage();
+    this.updateIndexes().updateStorage();
   }
 
   deleteTask(indexToDelete) {
+    this.tasks = this.tasks.filter((task) => task.index !== +indexToDelete);
     removeTaskFromList(indexToDelete);
-    const indexOfTaskToDelete = this.tasks.findIndex((task) => task.index === +indexToDelete);
-    this.tasks.splice(indexOfTaskToDelete, 1);
-    this.updateStorage();
+    this.updateIndexes().updateStorage();
   }
 
   updateStorage() {
@@ -43,6 +42,14 @@ export default class TaskController {
     }
   }
 
+  updateIndexes() {
+    this.tasks.forEach((task, i) => {
+      task.index = i;
+      updateElementIndex();
+    });
+    return this;
+  }
+
   updateCompleted(indexTarget) {
     const taskToUpdate = this.tasks.find((task) => task.index === +indexTarget);
     taskToUpdate.completed = !taskToUpdate.completed;
@@ -51,11 +58,11 @@ export default class TaskController {
 
   clearCompleted() {
     this.tasks = this.tasks.filter((task) => {
-      if (task.completed === true) {
+      if (task.completed) {
         removeTaskFromList(task.index);
       }
       return task.completed === false;
     });
-    this.updateStorage();
+    this.updateIndexes().updateStorage();
   }
 }
