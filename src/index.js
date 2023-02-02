@@ -66,9 +66,7 @@ const updateEventHandler = (currentTask) => {
   currentTask.addEventListener('touchend', () => {
     const afterElement = document.querySelector('.after-element');
     const afterIndex = afterElement == null ? null : afterElement.dataset.index;
-    console.log(currentTask.dataset.index, afterIndex-1)
     taskController.sort(currentTask.dataset.index, afterIndex);
-    console.log(JSON.stringify(taskController.tasks));
     const nextSibling = currentTask.nextElementSibling;
     if (nextSibling) nextSibling.classList.remove('after-element');
     currentTask.classList.remove('dragging');
