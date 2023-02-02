@@ -16,7 +16,7 @@ export default function initializeDragDrop() {
     ).element;
   }
   let previousAfterElement;
-  taskContainer.addEventListener('dragover', (e) => {
+  function dragOverHandler(e) {
     e.preventDefault();
     const currentDrag = document.querySelector('.dragging');
     const y = e.clientY || e.touches[0].clientY;
@@ -29,5 +29,6 @@ export default function initializeDragDrop() {
       afterElement.classList.add('after-element');
     }
     previousAfterElement = afterElement;
-  });
+  }
+  taskContainer.addEventListener('dragover', dragOverHandler);
 }

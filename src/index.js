@@ -59,10 +59,10 @@ const updateEventHandler = (currentTask) => {
   });
 
   currentTask.addEventListener('touchend', () => {
-    currentTask.classList.remove('dragging');
     const afterElement = document.querySelector('.after-element');
     const afterIndex = afterElement == null ? null : afterElement.dataset.index;
     taskController.sort(currentTask.dataset.index, afterIndex);
+    currentTask.classList.remove('dragging');
   });
 };
 
