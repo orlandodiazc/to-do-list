@@ -25,14 +25,17 @@ const updateEventHandler = (currentTask) => {
 
   const editTask = currentTask.querySelector('span');
   editTask.addEventListener('blur', (e) => {
-    const description = e.target.textContent;
-    const index = e.target.closest('.list-item').getAttribute('data-index');
     e.target.closest('.list-item').style.backgroundColor = 'white';
-    taskController.editTaskDescription(description, index);
     const deleteButton = e.target.parentNode.parentNode.querySelector('button');
     deleteButton.classList.add('hidden');
     currentTask.setAttribute('draggable', true);
     currentTask.querySelector('.drag-icon').classList.remove('hidden');
+  });
+
+  editTask.addEventListener('input', (e) => {
+    const description = e.target.textContent;
+    const index = e.target.closest('.list-item').getAttribute('data-index');
+    taskController.editTaskDescription(description, index);
   });
 
   editTask.addEventListener('focus', (e) => {
@@ -56,12 +59,18 @@ const updateEventHandler = (currentTask) => {
 
   currentTask.addEventListener('touchstart', () => {
     currentTask.classList.add('dragging');
+    const nextSibling = currentTask.nextElementSibling;
+    if (nextSibling) nextSibling.classList.add('after-element');
   });
 
   currentTask.addEventListener('touchend', () => {
     const afterElement = document.querySelector('.after-element');
     const afterIndex = afterElement == null ? null : afterElement.dataset.index;
+    console.log(currentTask.dataset.index, afterIndex-1)
     taskController.sort(currentTask.dataset.index, afterIndex);
+    console.log(JSON.stringify(taskController.tasks));
+    const nextSibling = currentTask.nextElementSibling;
+    if (nextSibling) nextSibling.classList.remove('after-element');
     currentTask.classList.remove('dragging');
   });
 
