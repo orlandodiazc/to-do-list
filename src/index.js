@@ -2,7 +2,7 @@ import './style.css';
 import TaskController from './modules/taskController.js';
 import Task from './modules/taskGenerator.js';
 import { addTaskToList } from './modules/taskDisplay.js';
-import startDragDrop from './modules/taskDragDrop.js';
+import initializeDragDrop from './modules/taskDragDrop.js';
 
 const taskController = new TaskController();
 
@@ -53,6 +53,17 @@ const updateEventHandler = (currentTask) => {
     const afterIndex = afterElement == null ? null : afterElement.dataset.index;
     taskController.sort(currentTask.dataset.index, afterIndex);
   });
+
+  currentTask.addEventListener('touchstart', () => {
+    currentTask.classList.add('dragging');
+  });
+
+  currentTask.addEventListener('touchend', () => {
+    currentTask.classList.remove('dragging');
+    const afterElement = document.querySelector('.after-element');
+    const afterIndex = afterElement == null ? null : afterElement.dataset.index;
+    taskController.sort(currentTask.dataset.index, afterIndex);
+  });
 };
 
 const displayTasks = (tasks) => {
@@ -85,4 +96,4 @@ inputTask.addEventListener('submit', (e) => {
   description.value = '';
 });
 
-startDragDrop();
+initializeDragDrop();

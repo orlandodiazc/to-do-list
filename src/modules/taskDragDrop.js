@@ -1,4 +1,4 @@
-export default function startDragDrop() {
+export default function initializeDragDrop() {
   const taskContainer = document.querySelector('.task-list');
 
   function getDragAfterElement(y) {
@@ -19,6 +19,7 @@ export default function startDragDrop() {
   taskContainer.addEventListener('dragover', (e) => {
     e.preventDefault();
     const currentDrag = document.querySelector('.dragging');
+    const y = e.clientY || e.touches[0].clientY;
     const afterElement = getDragAfterElement(e.clientY);
     if (previousAfterElement !== undefined) previousAfterElement.classList.remove('after-element');
     if (afterElement == null) {
