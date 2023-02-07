@@ -8,6 +8,7 @@ export default class TaskController {
   addTask(newTask) {
     this.tasks.push(newTask);
     this.updateStorage();
+    return this.tasks;
   }
 
   sort(movedIndex, afterIndex) {
@@ -26,8 +27,8 @@ export default class TaskController {
 
   deleteTask(indexToDelete) {
     this.tasks = this.tasks.filter((task) => task.index !== +indexToDelete);
-    removeTaskFromList(indexToDelete);
     this.updateIndexes().updateStorage();
+    return this.tasks;
   }
 
   updateStorage() {

@@ -1,19 +1,22 @@
 import './style.css';
 import TaskController from './modules/taskController.js';
 import Task from './modules/taskGenerator.js';
-import { addTaskToList } from './modules/taskDisplay.js';
+import { addTaskToList, removeTaskFromList } from './modules/taskDisplay.js';
 import dragOverHandler from './modules/taskDragDrop.js';
 
 const taskController = new TaskController();
 
 const btnClear = document.querySelector('.button-clear');
 const inputTask = document.querySelector('.form-description');
+const description = document.querySelector('#taskDescription');
+const taskList = document.querySelector('.task-list');
 
 const updateEventHandler = (currentTask) => {
   const btnDelete = currentTask.querySelector('button');
   btnDelete.addEventListener('mousedown', (e) => {
     const index = e.target.closest('.list-item').getAttribute('data-index');
     taskController.deleteTask(index);
+    removeTaskFromList(index);
   });
 
   const inputCheckbox = currentTask.querySelector('input');
@@ -77,7 +80,7 @@ const updateEventHandler = (currentTask) => {
 
 const displayTasks = (tasks) => {
   tasks.forEach((task) => {
-    const currentTask = addTaskToList(task);
+    const currentTask = addTaskToList(taskList ,task);
     updateEventHandler(currentTask);
   });
 };
@@ -97,10 +100,11 @@ btnClear.addEventListener('click', () => {
 
 inputTask.addEventListener('submit', (e) => {
   e.preventDefault();
-  const description = e.target.querySelector('#taskDescription');
   const newTask = new Task(description.value, false, taskController.tasks.length);
   taskController.addTask(newTask);
-  const currentTask = addTaskToList(newTask);
+  const currentTask = addTaskToList(taskList ,newTask);
   updateEventHandler(currentTask);
   description.value = '';
 });
+
+export default taskController;

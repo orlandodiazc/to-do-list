@@ -1,7 +1,5 @@
-const taskList = document.querySelector('.task-list');
-const listItemTemplate = document.getElementById('list-item-template');
-
-export const addTaskToList = (newTask) => {
+export const addTaskToList = (listContainer,newTask) => {
+  const listItemTemplate = document.getElementById('list-item-template');
   const taskClone = listItemTemplate.content.cloneNode(true);
   const description = document.createTextNode(newTask.description);
   const listItem = taskClone.querySelector('.list-item');
@@ -12,12 +10,13 @@ export const addTaskToList = (newTask) => {
   taskCheckbox.setAttribute('value', `task${newTask.index}`);
   if (newTask.completed) listItem.querySelector('.task-description').classList.add('strikethrough');
   taskCheckbox.checked = newTask.completed;
-  taskList.appendChild(taskClone);
-  const currentTask = taskList.querySelector('li:last-child');
-  return currentTask;
+  listContainer.appendChild(taskClone);
+  const currentTask = listContainer.querySelector('li:last-child');
+  return listContainer;
 };
 
 export const removeTaskFromList = (taskIndex) => {
+  const taskList = document.querySelector('.task-list');
   const activeTask = taskList.querySelector(`[data-index="${taskIndex}"]`);
   taskList.removeChild(activeTask);
 };
