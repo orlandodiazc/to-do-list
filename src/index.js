@@ -8,8 +8,6 @@ const taskController = new TaskController();
 
 const btnClear = document.querySelector('.button-clear');
 const inputTask = document.querySelector('.form-description');
-const description = document.querySelector('#taskDescription');
-const taskList = document.querySelector('.task-list');
 
 const updateEventHandler = (currentTask) => {
   const btnDelete = currentTask.querySelector('button');
@@ -80,7 +78,7 @@ const updateEventHandler = (currentTask) => {
 
 const displayTasks = (tasks) => {
   tasks.forEach((task) => {
-    const currentTask = addTaskToList(taskList ,task);
+    const currentTask = addTaskToList(task);
     updateEventHandler(currentTask);
   });
 };
@@ -95,16 +93,20 @@ if (localStorage.getItem('tasks') && JSON.parse(localStorage.getItem('tasks')).l
 }
 
 btnClear.addEventListener('click', () => {
+  taskController.tasks.forEach(task => {
+    if (task.completed) {
+      removeTaskFromList(task.index);
+    }
+  });
   taskController.clearCompleted();
 });
 
 inputTask.addEventListener('submit', (e) => {
   e.preventDefault();
+  const description = e.target.querySelector('#taskDescription');
   const newTask = new Task(description.value, false, taskController.tasks.length);
   taskController.addTask(newTask);
-  const currentTask = addTaskToList(taskList ,newTask);
+  const currentTask = addTaskToList(newTask);
   updateEventHandler(currentTask);
   description.value = '';
 });
-
-export default taskController;

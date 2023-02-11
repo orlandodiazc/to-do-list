@@ -1,4 +1,4 @@
-export const addTaskToList = (listContainer,newTask) => {
+export const addTaskToList = (listContainer ,newTask) => {
   const listItemTemplate = document.getElementById('list-item-template');
   const taskClone = listItemTemplate.content.cloneNode(true);
   const description = document.createTextNode(newTask.description);
@@ -12,16 +12,17 @@ export const addTaskToList = (listContainer,newTask) => {
   taskCheckbox.checked = newTask.completed;
   listContainer.appendChild(taskClone);
   const currentTask = listContainer.querySelector('li:last-child');
-  return listContainer;
+  return currentTask;
 };
 
 export const removeTaskFromList = (taskIndex) => {
   const taskList = document.querySelector('.task-list');
-  const activeTask = taskList.querySelector(`[data-index="${taskIndex}"]`);
+  const activeTask = document.querySelector(`[data-index="${taskIndex}"]`);
   taskList.removeChild(activeTask);
 };
 
 export const updateElementIndex = () => {
+  const taskList = document.querySelector('.task-list');
   const taskItems = taskList.querySelectorAll('.list-item');
   taskItems.forEach((task, i) => {
     task.dataset.index = i;

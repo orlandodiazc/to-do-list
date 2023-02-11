@@ -36,11 +36,10 @@ export default class TaskController {
   }
 
   editTaskDescription(description, indexTarget) {
-    const result = this.tasks.find((task) => task.index === +indexTarget);
-    if (result !== undefined) {
-      result.description = description;
-      this.updateStorage();
-    }
+    const result = this.tasks[+indexTarget];
+    result.description = description;
+    this.updateStorage();
+    return this.tasks;
   }
 
   updateIndexes() {
@@ -52,18 +51,17 @@ export default class TaskController {
   }
 
   updateCompleted(indexTarget) {
-    const taskToUpdate = this.tasks.find((task) => task.index === +indexTarget);
+    const taskToUpdate = this.tasks[+indexTarget];
     taskToUpdate.completed = !taskToUpdate.completed;
     this.updateStorage();
+    return this.tasks;
   }
 
   clearCompleted() {
     this.tasks = this.tasks.filter((task) => {
-      if (task.completed) {
-        removeTaskFromList(task.index);
-      }
-      return task.completed === false;
+      return !task.completed;
     });
     this.updateIndexes().updateStorage();
+    return this.tasks;
   }
 }
