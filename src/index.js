@@ -1,8 +1,8 @@
-import './style.css';
 import TaskController from './modules/taskController.js';
-import Task from './modules/taskGenerator.js';
 import { addTaskToList, removeTaskFromList } from './modules/taskDisplay.js';
 import dragOverHandler from './modules/taskDragDrop.js';
+import Task from './modules/taskGenerator.js';
+import './style.css';
 
 const taskController = new TaskController();
 
@@ -80,7 +80,7 @@ const updateEventHandler = (currentTask) => {
 
 const displayTasks = (tasks) => {
   tasks.forEach((task) => {
-    const currentTask = addTaskToList(taskList ,task);
+    const currentTask = addTaskToList(taskList, task);
     updateEventHandler(currentTask);
   });
 };
@@ -102,7 +102,7 @@ inputTask.addEventListener('submit', (e) => {
   e.preventDefault();
   const newTask = new Task(description.value, false, taskController.tasks.length);
   taskController.addTask(newTask);
-  const currentTask = addTaskToList(taskList ,newTask);
+  const currentTask = addTaskToList(taskList, newTask);
   updateEventHandler(currentTask);
   description.value = '';
 });
