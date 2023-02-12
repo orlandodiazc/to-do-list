@@ -8,19 +8,6 @@
     "build": "webpack",
     "start": "webpack serve --open"
   },
-  "prettier": {
-    "printWidth": 250,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "overrides": [
-      {
-        "files": "**/*.js",
-        "options": {
-          "printWidth": 100
-        }
-      }
-    ]
-  },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.7.3",

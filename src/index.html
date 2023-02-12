@@ -12,7 +12,12 @@
         <div class="list-item"><h1>Today's To Do</h1></div>
         <form action="#" class="form-description">
           <div class="list-item">
-            <input type="text" name="description" id="taskDescription" placeholder="Add to your list" />
+            <input
+              type="text"
+              name="description"
+              id="taskDescription"
+              placeholder="Add to your list"
+            />
           </div>
         </form>
         <ul role="list" class="task-list"></ul>
@@ -20,9 +25,15 @@
           <li class="list-item" draggable="true">
             <div class="task-item" draggable="false">
               <label><input draggable="false" type="checkbox" id="" value="" /></label>
-              <div><span class="task-description" draggable="false" contenteditable="true"></span></div>
-              <button draggable="false" class="icon-button hidden"><img draggable="false" src="assets/icon-delete.svg" alt="Delete task" /></button>
-              <button draggable="false" class="icon-button drag-icon"><img draggable="false" src="assets/icon-drag.svg" alt="Drag vertically" /></button>
+              <div>
+                <span class="task-description" draggable="false" contenteditable="true"></span>
+              </div>
+              <button draggable="false" class="icon-button hidden">
+                <img draggable="false" src="assets/icon-delete.svg" alt="Delete task" />
+              </button>
+              <button draggable="false" class="icon-button drag-icon">
+                <img draggable="false" src="assets/icon-drag.svg" alt="Drag vertically" />
+              </button>
             </div>
           </li>
         </template>
