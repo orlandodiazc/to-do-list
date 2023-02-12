@@ -11,6 +11,13 @@ const inputTask = document.querySelector('.form-description');
 const description = document.querySelector('#taskDescription');
 const taskList = document.querySelector('.task-list');
 
+const dragEndHandler = (currentTask) => {
+  currentTask.classList.remove('dragging');
+  const afterElement = document.querySelector('.after-element');
+  const afterIndex = afterElement == null ? null : afterElement.dataset.index;
+  taskController.sort(currentTask.dataset.index, afterIndex);
+};
+
 const updateEventHandler = (currentTask) => {
   const btnDelete = currentTask.querySelector('button');
   btnDelete.addEventListener('mousedown', (e) => {
@@ -53,12 +60,7 @@ const updateEventHandler = (currentTask) => {
     currentTask.classList.add('dragging');
   });
 
-  currentTask.addEventListener('dragend', () => {
-    currentTask.classList.remove('dragging');
-    const afterElement = document.querySelector('.after-element');
-    const afterIndex = afterElement == null ? null : afterElement.dataset.index;
-    taskController.sort(currentTask.dataset.index, afterIndex);
-  });
+  currentTask.addEventListener('dragend', () => dragEndHandler(currentTask));
 
   currentTask.addEventListener('touchstart', () => {
     currentTask.classList.add('dragging');
@@ -67,12 +69,9 @@ const updateEventHandler = (currentTask) => {
   });
 
   currentTask.addEventListener('touchend', () => {
-    const afterElement = document.querySelector('.after-element');
-    const afterIndex = afterElement == null ? null : afterElement.dataset.index;
-    taskController.sort(currentTask.dataset.index, afterIndex);
     const nextSibling = currentTask.nextElementSibling;
     if (nextSibling) nextSibling.classList.remove('after-element');
-    currentTask.classList.remove('dragging');
+    dragEndHandler(currentTask);
   });
 
   currentTask.addEventListener('touchmove', dragOverHandler);
