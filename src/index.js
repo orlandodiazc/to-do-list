@@ -22,8 +22,8 @@ const updateEventHandler = (currentTask) => {
   const btnDelete = currentTask.querySelector('button');
   btnDelete.addEventListener('mousedown', (e) => {
     const index = e.target.closest('.list-item').getAttribute('data-index');
-    taskController.deleteTask(index);
     removeTaskFromList(index);
+    taskController.deleteTask(index);
   });
 
   const inputCheckbox = currentTask.querySelector('input');
