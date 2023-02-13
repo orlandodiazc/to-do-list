@@ -30,4 +30,5 @@ export default function dragOverHandler(e) {
   }
   previousAfterElement = afterElement;
 }
+
 taskContainer.addEventListener('dragover', dragOverHandler);
