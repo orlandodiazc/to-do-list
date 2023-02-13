@@ -46,8 +46,8 @@ export default class TaskController {
   updateIndexes() {
     this.tasks.forEach((task, i) => {
       task.index = i;
+      updateElementIndex();
     });
-    updateElementIndex();
     return this;
   }
 
