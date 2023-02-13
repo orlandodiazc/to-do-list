@@ -1,5 +1,5 @@
 import TaskController from './modules/taskController.js';
-import { addTaskToList, removeTaskFromList } from './modules/taskDisplay.js';
+import { addTaskToList, removeTaskFromList, updateElementIndex } from './modules/taskDisplay.js';
 import dragOverHandler from './modules/taskDragDrop.js';
 import Task from './modules/taskGenerator.js';
 import './style.css';
@@ -10,20 +10,23 @@ const btnClear = document.querySelector('.button-clear');
 const inputTask = document.querySelector('.form-description');
 const description = document.querySelector('#taskDescription');
 const taskList = document.querySelector('.task-list');
+const listItemTemplate = document.querySelector('#list-item-template');
 
 const dragEndHandler = (currentTask) => {
   currentTask.classList.remove('dragging');
   const afterElement = document.querySelector('.after-element');
   const afterIndex = afterElement == null ? null : afterElement.dataset.index;
   taskController.sort(currentTask.dataset.index, afterIndex);
+  updateElementIndex(taskList);
 };
 
 const updateEventHandler = (currentTask) => {
   const btnDelete = currentTask.querySelector('button');
   btnDelete.addEventListener('mousedown', (e) => {
     const index = e.target.closest('.list-item').getAttribute('data-index');
-    removeTaskFromList(index);
+    removeTaskFromList(taskList, index);
     taskController.deleteTask(index);
+    updateElementIndex(taskList);
   });
 
   const inputCheckbox = currentTask.querySelector('input');
@@ -79,7 +82,7 @@ const updateEventHandler = (currentTask) => {
 
 const displayTasks = (tasks) => {
   tasks.forEach((task) => {
-    const currentTask = addTaskToList(taskList, task);
+    const currentTask = addTaskToList(listItemTemplate, taskList, task);
     updateEventHandler(currentTask);
   });
 };
@@ -94,16 +97,24 @@ if (localStorage.getItem('tasks') && JSON.parse(localStorage.getItem('tasks')).l
 }
 
 btnClear.addEventListener('click', () => {
+  taskController.tasks.forEach((task) => {
+    if (task.completed) {
+      removeTaskFromList(taskList, task.index);
+    }
+  });
   taskController.clearCompleted();
+  updateElementIndex(taskList);
 });
 
 inputTask.addEventListener('submit', (e) => {
   e.preventDefault();
-  const newTask = new Task(description.value, false, taskController.tasks.length);
-  taskController.addTask(newTask);
-  const currentTask = addTaskToList(taskList, newTask);
-  updateEventHandler(currentTask);
-  description.value = '';
+  if (description.value) {
+    const newTask = new Task(description.value, false, taskController.tasks.length);
+    taskController.addTask(newTask);
+    const currentTask = addTaskToList(listItemTemplate, taskList, newTask);
+    updateEventHandler(currentTask);
+    description.value = '';
+  }
 });
 
 export default taskController;
