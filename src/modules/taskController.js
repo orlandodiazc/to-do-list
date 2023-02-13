@@ -10,15 +10,13 @@ export default class TaskController {
   }
 
   sort(movedIndex, afterIndex) {
-    const fromIndex = this.tasks.findIndex((task) => task.index === +movedIndex);
-    const toIndex = this.tasks.findIndex((task) => task.index === +afterIndex);
-    const taskToMove = this.tasks.splice(fromIndex, 1)[0];
+    const taskToMove = this.tasks.splice(+movedIndex, 1)[0];
     if (afterIndex == null) {
       this.tasks.push(taskToMove);
-    } else if (fromIndex <= toIndex) {
-      this.tasks.splice(toIndex - 1, 0, taskToMove);
+    } else if (+movedIndex <= +afterIndex) {
+      this.tasks.splice(afterIndex - 1, 0, taskToMove);
     } else {
-      this.tasks.splice(toIndex, 0, taskToMove);
+      this.tasks.splice(afterIndex, 0, taskToMove);
     }
     this.updateIndexes();
     this.updateStorage();
