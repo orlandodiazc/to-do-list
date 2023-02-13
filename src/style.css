@@ -75,6 +75,10 @@ main {
   width: 100%;
 }
 
+.button-clear:hover {
+  cursor: pointer;
+}
+
 .container {
   display: grid;
   place-items: center;

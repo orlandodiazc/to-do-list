@@ -1,5 +1,3 @@
-import { removeTaskFromList, updateElementIndex } from './taskDisplay.js';
-
 export default class TaskController {
   constructor() {
     this.tasks = [];
@@ -12,22 +10,22 @@ export default class TaskController {
   }
 
   sort(movedIndex, afterIndex) {
-    const fromIndex = this.tasks.findIndex((task) => task.index === +movedIndex);
-    const toIndex = this.tasks.findIndex((task) => task.index === +afterIndex);
-    const taskToMove = this.tasks.splice(fromIndex, 1)[0];
+    const taskToMove = this.tasks.splice(+movedIndex, 1)[0];
     if (afterIndex == null) {
       this.tasks.push(taskToMove);
-    } else if (fromIndex <= toIndex) {
-      this.tasks.splice(toIndex - 1, 0, taskToMove);
+    } else if (+movedIndex <= +afterIndex) {
+      this.tasks.splice(afterIndex - 1, 0, taskToMove);
     } else {
-      this.tasks.splice(toIndex, 0, taskToMove);
+      this.tasks.splice(afterIndex, 0, taskToMove);
     }
-    this.updateIndexes().updateStorage();
+    this.updateIndexes();
+    this.updateStorage();
   }
 
   deleteTask(indexToDelete) {
     this.tasks = this.tasks.filter((task) => task.index !== +indexToDelete);
-    this.updateIndexes().updateStorage();
+    this.updateIndexes();
+    this.updateStorage();
     return this.tasks;
   }
 
@@ -41,29 +39,26 @@ export default class TaskController {
       result.description = description;
       this.updateStorage();
     }
+    return this.tasks;
   }
 
   updateIndexes() {
     this.tasks.forEach((task, i) => {
       task.index = i;
     });
-    updateElementIndex();
-    return this;
   }
 
   updateCompleted(indexTarget) {
     const taskToUpdate = this.tasks.find((task) => task.index === +indexTarget);
     taskToUpdate.completed = !taskToUpdate.completed;
     this.updateStorage();
+    return this.tasks;
   }
 
   clearCompleted() {
-    this.tasks = this.tasks.filter((task) => {
-      if (task.completed) {
-        removeTaskFromList(task.index);
-      }
-      return task.completed === false;
-    });
-    this.updateIndexes().updateStorage();
+    this.tasks = this.tasks.filter((task) => task.completed === false);
+    this.updateIndexes();
+    this.updateStorage();
+    return this.tasks;
   }
 }

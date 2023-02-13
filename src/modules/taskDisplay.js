@@ -1,5 +1,4 @@
-export const addTaskToList = (listContainer, newTask) => {
-  const listItemTemplate = document.getElementById('list-item-template');
+export const addTaskToList = (listItemTemplate, listContainer, newTask) => {
   const taskClone = listItemTemplate.content.cloneNode(true);
   const description = document.createTextNode(newTask.description);
   const listItem = taskClone.querySelector('.list-item');
@@ -14,16 +13,14 @@ export const addTaskToList = (listContainer, newTask) => {
   const currentTask = listContainer.querySelector('li:last-child');
   return currentTask;
 };
-
-export const removeTaskFromList = (taskIndex) => {
-  const taskList = document.querySelector('.task-list');
-  const activeTask = taskList.querySelector(`[data-index="${taskIndex}"]`);
-  taskList.removeChild(activeTask);
+export const removeTaskFromList = (listContainer, taskIndex) => {
+  // const taskList = document.querySelector('.task-list');
+  const activeTask = listContainer.querySelector(`[data-index="${taskIndex}"]`);
+  listContainer.removeChild(activeTask);
 };
 
-export const updateElementIndex = () => {
-  const taskList = document.querySelector('.task-list');
-  const taskItems = taskList.querySelectorAll('.list-item');
+export const updateElementIndex = (listContainer) => {
+  const taskItems = listContainer.querySelectorAll('.list-item');
   taskItems.forEach((task, i) => {
     task.dataset.index = i;
   });
