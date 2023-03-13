@@ -61,7 +61,7 @@ To get a local copy up and running, follow these steps.
 👤 **Orlando Diaz**
 
 - GitHub: [@orlandodiazc](https://github.com/orlandodiazc)
-- LinkedIn: [LinkedIn](www.linkedin.com/in/orlando-diaz-conde)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/orlando-diaz-conde/)
 
 <!-- FUTURE FEATURES -->
 
