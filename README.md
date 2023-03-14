@@ -35,15 +35,13 @@ After you're finished please remove all the comments and instructions!
 
 This project was created using:
 
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li>HTML5</li>
-    <li>CSS3</li>
-    <li>JavaScript</li>
-    <li>Webpack</li>
-  </ul>
-</details>
+<ul>
+  <li>HTML5</li>
+  <li>CSS3</li>
+  <li>JavaScript</li>
+  <li>Webpack</li>
+</ul>
+
 
 <!-- Features -->
 
